@@ -67,6 +67,7 @@
 
 /* USER CODE BEGIN PV */
 MPU6050_HandleTypeDef MPU6050;
+uint8_t who;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -119,8 +120,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	
+
     /* USER CODE BEGIN 3 */
+		
   }
   /* USER CODE END 3 */
 }

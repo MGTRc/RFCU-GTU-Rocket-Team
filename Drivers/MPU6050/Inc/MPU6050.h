@@ -27,15 +27,19 @@ typedef enum{
 
 typedef struct MPU6050{
 	I2C_HandleTypeDef myI2C;
-
 	uint8_t statusMPU6050;
 	
 }MPU6050_HandleTypeDef;
 
 
+//Public Functions
 MPU6050_StatusTypeDef isMPU6050Ready(struct MPU6050 *MPU6050);
 MPU6050_StatusTypeDef initMPU6050(struct MPU6050 *MPU6050, I2C_HandleTypeDef myI2C);
 
+//Private Function
+void writeByte(struct MPU6050 *MPU6050,uint8_t adress, uint8_t command);
+void readByte(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite);
+void readBytes(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite, uint8_t size);
 
 
 #ifdef __cplusplus
