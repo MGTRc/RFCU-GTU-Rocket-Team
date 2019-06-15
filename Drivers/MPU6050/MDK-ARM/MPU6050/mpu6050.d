@@ -32,3 +32,5 @@ mpu6050\mpu6050.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 mpu6050\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 mpu6050\mpu6050.o: ../Inc/i2c.h
 mpu6050\mpu6050.o: ../Inc/main.h
+mpu6050\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+mpu6050\mpu6050.o: ../Inc/KalmanFilter.h

@@ -119,7 +119,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		readAccelData(&MPU6050);
+		calculateAngles(&MPU6050);
     /* USER CODE BEGIN 3 */
 		
   }

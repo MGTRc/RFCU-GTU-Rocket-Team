@@ -23,11 +23,13 @@ MPU6050_StatusTypeDef initMPU6050(struct MPU6050 *MPU6050, I2C_HandleTypeDef myI
 	MPU6050->myI2C = myI2C;
 	
 	isMPU6050Ready(MPU6050);
-	HAL_Delay(1000);
-	//calibrateMPU6050(MPU6050);
-	HAL_Delay(1000);
+	initKALMAN(&MPU6050->kalmanX);
+	initKALMAN(&MPU6050->kalmanY);
 	setMPU6050(MPU6050);
-	HAL_Delay(1000);
+	
+	readAccelData(MPU6050);
+	setAnge
+	
 	
 	return MPU6050_OK;
 };
@@ -48,6 +50,10 @@ void readBytes(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite, uint8_
 	HAL_I2C_Master_Receive(&MPU6050->myI2C,MPU6050_Read_Adress,toWrite,size,100);
 }
 
+/**
+* @Brief :  It will be use for next application
+**/
+/*
 void calibrateMPU6050(struct MPU6050 *MPU6050){
 	  uint8_t data[12]; // data array to hold accelerometer and gyro x, y, z, data
 		uint16_t ii, packet_count, fifo_count;
@@ -184,11 +190,12 @@ void calibrateMPU6050(struct MPU6050 *MPU6050){
   MPU6050->accOffset[1] = (float)accel_bias[1] / (float)accelsensitivity;
   MPU6050->accOffset[2] = (float)accel_bias[2] / (float)accelsensitivity;
 };
+*/
 
 void setMPU6050(struct MPU6050 *MPU6050){
 	// wake up device-don't need this here if using calibration function below
-  //  writeByte(MPU6050, PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
-  //  delay(100); // Delay 100 ms for PLL to get established on x-axis gyro; should check for PLL ready interrupt
+  writeByte(MPU6050, PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
+  HAL_Delay(100); // Delay 100 ms for PLL to get established on x-axis gyro; should check for PLL ready interrupt
 
   // get stable time source
   writeByte(MPU6050, PWR_MGMT_1, 0x01);  // Set clock source to be PLL with x-axis gyroscope reference, bits 2:0 = 001
@@ -231,8 +238,15 @@ void readAccelData(struct MPU6050 *MPU6050){
   MPU6050->accData[1]  = (int16_t)((rawData[2] << 8) | rawData[3]) ;
 	MPU6050->accData[2]  = (int16_t)((rawData[4] << 8) | rawData[5]) ;
 	
-	MPU6050->accX = MPU6050->accData[0]*2.0 / 32768.0;
-	MPU6050->accY = MPU6050->accData[1]*2.0 / 32768.0;
-	MPU6050->accZ = MPU6050->accData[2]*2.0 / 32768.0;
-	
+	MPU6050->accX = MPU6050->accData[0] * 2.0 / 32768.0;
+	MPU6050->accY = MPU6050->accData[1] * 2.0 / 32768.0;
+	MPU6050->accZ = MPU6050->accData[2] * 2.0 / 32768.0;
+
+	HAL_Delay(200);
+}
+
+void calculateAngles(struct MPU6050 *MPU6050){
+	readAccelData(MPU6050);
+	MPU6050->angleX = atan2(MPU6050->accY, MPU6050->accZ) * RAD_TO_DEG;
+	MPU6050->angleY = atan(-MPU6050->accX / sqrt(MPU6050->accY * MPU6050->accY + MPU6050->accZ * MPU6050->accZ)) * RAD_TO_DEG;
 }

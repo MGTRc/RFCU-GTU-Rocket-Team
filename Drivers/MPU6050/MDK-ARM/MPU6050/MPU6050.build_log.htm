@@ -22,29 +22,31 @@ Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
 C:\Users\METECAN\Documents\GitHub\RFCU-GTU-Rocket-Team\Drivers\MPU6050\MDK-ARM\MPU6050.uvprojx
-Project File Date:  06/14/2019
+Project File Date:  06/15/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'MPU6050'
 compiling MPU6050.c...
-../Inc/MPU6050.h(82): warning:  #1-D: last line of file ends without a newline
+../Inc/KalmanFilter.h(41): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Inc/MPU6050.h(95): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\Src\MPU6050.c(15): warning:  #940-D: missing return statement at end of non-void function "isMPU6050Ready" 
   };
-..\Src\MPU6050.c(234): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	MPU6050->accX = MPU6050->accData[0]*2.0 / 32768.0;
-..\Src\MPU6050.c(235): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	MPU6050->accY = MPU6050->accData[1]*2.0 / 32768.0;
-..\Src\MPU6050.c(236): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	MPU6050->accZ = MPU6050->accData[2]*2.0 / 32768.0;
-..\Src\MPU6050.c(238): warning:  #1-D: last line of file ends without a newline
+..\Src\MPU6050.c(238): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	MPU6050->accX = MPU6050->accData[0] * 2.0 / 32768.0;
+..\Src\MPU6050.c(239): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	MPU6050->accY = MPU6050->accData[1] * 2.0 / 32768.0;
+..\Src\MPU6050.c(240): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	MPU6050->accZ = MPU6050->accData[2] * 2.0 / 32768.0;
+..\Src\MPU6050.c(249): warning:  #1-D: last line of file ends without a newline
   }
-..\Src\MPU6050.c: 6 warnings, 0 errors
+..\Src\MPU6050.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=7084 RO-data=448 RW-data=16 ZI-data=1256  
+Program Size: Code=9876 RO-data=612 RW-data=20 ZI-data=1364  
 FromELF: creating hex file...
-"MPU6050\MPU6050.axf" - 0 Error(s), 6 Warning(s).
+"MPU6050\MPU6050.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
