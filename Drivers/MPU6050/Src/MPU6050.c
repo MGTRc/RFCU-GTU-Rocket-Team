@@ -120,8 +120,6 @@ MPU6050_StatusTypeDef calculateAngles(struct MPU6050 *MPU6050){
 	
 	MPU6050->angleX = atan2(MPU6050->accY, MPU6050->accZ) * RAD_TO_DEG;
 	MPU6050->angleY = atan(-MPU6050->accX / sqrt(MPU6050->accY * MPU6050->accY + MPU6050->accZ * MPU6050->accZ)) * RAD_TO_DEG;
-
-	
 	return MPU6050_OK;
 }
 
