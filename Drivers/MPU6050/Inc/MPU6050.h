@@ -43,6 +43,7 @@
 #define ZA_OFFSET_L				0x0B
 #define INT_PIN_CFG				0x37
 #define ACCEL_XOUT_H 		0x3B
+#define GYRO_XOUT_H			0x43
 
 #include "stm32f4xx_hal.h"
 #include "stdlib.h"
@@ -78,6 +79,7 @@ typedef struct MPU6050{
 //Public Functions
 MPU6050_StatusTypeDef isMPU6050Ready(struct MPU6050 *MPU6050);
 MPU6050_StatusTypeDef initMPU6050(struct MPU6050 *MPU6050, I2C_HandleTypeDef myI2C);
+MPU6050_StatusTypeDef calculateAngles(struct MPU6050 *MPU605);
 
 //Private Function
 void writeByte(struct MPU6050 *MPU6050,uint8_t adress, uint8_t command);
@@ -85,8 +87,7 @@ void readByte(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite);
 void readBytes(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite, uint8_t size);
 void calibrateMPU6050(struct MPU6050 *MPU6050);
 void setMPU6050(struct MPU6050 *MPU6050);
-void readAccelData(struct MPU6050 *MPU6050);
-void calculateAngles(struct MPU6050 *MPU6050);
+void readRawData(struct MPU6050 *MPU6050);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,6 @@
 Dependencies for Project 'MPU6050', Target 'MPU6050': (DO NOT MODIFY !)
 F (startup_stm32f407xx.s)(0x5D03CEB4)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1"--list startup_stm32f407xx.lst --xref -o mpu6050\startup_stm32f407xx.o --depend mpu6050\startup_stm32f407xx.d)
-F (../Src/main.c)(0x5D04817F)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o mpu6050\main.o --omf_browse mpu6050\main.crf --depend mpu6050\main.d)
+F (../Src/main.c)(0x5D048923)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o mpu6050\main.o --omf_browse mpu6050\main.crf --depend mpu6050\main.d)
 I (../Inc/main.h)(0x5D03CEAD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C72A866)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5D03CEAD)
@@ -32,10 +32,10 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5C72A866)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C72A866)
 I (../Inc/i2c.h)(0x5D03CEAC)
 I (../Inc/gpio.h)(0x5D03CEAB)
-I (../Inc/MPU6050.h)(0x5D048143)
+I (../Inc/MPU6050.h)(0x5D048AC9)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599F218C)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599F218E)
-I (../Inc/KalmanFilter.h)(0x5CF7B667)
+I (../Inc/KalmanFilter.h)(0x5D0484F2)
 F (../Src/gpio.c)(0x5D03CEAB)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o mpu6050\gpio.o --omf_browse mpu6050\gpio.crf --depend mpu6050\gpio.d)
 I (../Inc/gpio.h)(0x5D03CEAB)
 I (../Inc/main.h)(0x5D03CEAD)
@@ -159,8 +159,8 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x5C72A866)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x5C72A866)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x5C72A866)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x5C72A866)
-F (..\Src\MPU6050.c)(0x5D04830E)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o mpu6050\mpu6050.o --omf_browse mpu6050\mpu6050.crf --depend mpu6050\mpu6050.d)
-I (../Inc/MPU6050.h)(0x5D048143)
+F (..\Src\MPU6050.c)(0x5D048C70)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o mpu6050\mpu6050.o --omf_browse mpu6050\mpu6050.crf --depend mpu6050\mpu6050.d)
+I (../Inc/MPU6050.h)(0x5D048AC9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C72A866)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5D03CEAD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5C72A866)
@@ -193,9 +193,9 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599F218C)
 I (../Inc/i2c.h)(0x5D03CEAC)
 I (../Inc/main.h)(0x5D03CEAD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599F218E)
-I (../Inc/KalmanFilter.h)(0x5CF7B667)
-F (..\Src\KalmanFilter.c)(0x5CF7BB65)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o mpu6050\kalmanfilter.o --omf_browse mpu6050\kalmanfilter.crf --depend mpu6050\kalmanfilter.d)
-I (../Inc/KalmanFilter.h)(0x5CF7B667)
+I (../Inc/KalmanFilter.h)(0x5D0484F2)
+F (..\Src\KalmanFilter.c)(0x5D048504)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_MPU6050-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o mpu6050\kalmanfilter.o --omf_browse mpu6050\kalmanfilter.crf --depend mpu6050\kalmanfilter.d)
+I (../Inc/KalmanFilter.h)(0x5D0484F2)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x5C72A866)
 I (../Inc/stm32f4xx_hal_conf.h)(0x5D03CEAD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x5C72A866)

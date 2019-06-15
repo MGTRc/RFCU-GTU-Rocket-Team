@@ -33,6 +33,7 @@ typedef struct KALMAN{
 
 KALMAN_StatusTypeDef initKALMAN(struct KALMAN *KALMAN);
 float getAngle(struct KALMAN *KALMAN,float newAngle, float newRate, float dt);
+void setAngle(struct KALMAN *KALMAN,float angle);
 	 
 #ifdef __cplusplus
 }

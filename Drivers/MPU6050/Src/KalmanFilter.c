@@ -42,3 +42,7 @@ float getAngle(struct KALMAN *KALMAN,float newAngle, float newRate, float dt){
 	 
 	 return KALMAN->angle;
 }
+
+void setAngle(struct KALMAN *KALMAN,float angle){
+	KALMAN->angle = angle;
+}

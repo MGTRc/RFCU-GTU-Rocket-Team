@@ -119,8 +119,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		calculateAngles(&MPU6050);
     /* USER CODE BEGIN 3 */
+		calculateAngles(&MPU6050);
 		
   }
   /* USER CODE END 3 */

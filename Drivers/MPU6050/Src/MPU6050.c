@@ -27,9 +27,14 @@ MPU6050_StatusTypeDef initMPU6050(struct MPU6050 *MPU6050, I2C_HandleTypeDef myI
 	initKALMAN(&MPU6050->kalmanY);
 	setMPU6050(MPU6050);
 	
-	readAccelData(MPU6050);
-	setAnge
+	HAL_Delay(1000);
 	
+	readRawData(MPU6050);
+	MPU6050->angleX = atan2(MPU6050->accY, MPU6050->accZ) * RAD_TO_DEG;
+	MPU6050->angleY = atan(-MPU6050->accX / sqrt(MPU6050->accY * MPU6050->accY + MPU6050->accZ * MPU6050->accZ)) * RAD_TO_DEG;
+	setAngle(&MPU6050->kalmanX,MPU6050->angleX);
+	setAngle(&MPU6050->kalmanY,MPU6050->angleY);
+	MPU6050->timer = HAL_GetTick();
 	
 	return MPU6050_OK;
 };
@@ -231,7 +236,7 @@ void setMPU6050(struct MPU6050 *MPU6050){
 	writeByte(MPU6050, INT_ENABLE, 0x01); // Enable data ready (bit 0) interrupt
 }
 
-void readAccelData(struct MPU6050 *MPU6050){
+void readRawData(struct MPU6050 *MPU6050){
 	uint8_t rawData[6];  // x/y/z accel register data stored here
   readBytes(MPU6050, ACCEL_XOUT_H, &rawData[0],6);  // Read the six raw data registers into data array
 	MPU6050->accData[0] 	= (int16_t)((rawData[0] << 8) | rawData[1]) ;  // Turn the MSB and LSB into a signed 16-bit value
@@ -241,12 +246,25 @@ void readAccelData(struct MPU6050 *MPU6050){
 	MPU6050->accX = MPU6050->accData[0] * 2.0 / 32768.0;
 	MPU6050->accY = MPU6050->accData[1] * 2.0 / 32768.0;
 	MPU6050->accZ = MPU6050->accData[2] * 2.0 / 32768.0;
+	
+  readBytes(MPU6050, GYRO_XOUT_H, &rawData[0],6);  // Read the six raw data registers sequentially into data array
+  MPU6050->gyroData[0] = (int16_t)((rawData[0] << 8) | rawData[1]) ;  // Turn the MSB and LSB into a signed 16-bit value
+  MPU6050->gyroData[1] = (int16_t)((rawData[2] << 8) | rawData[3]) ;
+  MPU6050->gyroData[2] = (int16_t)((rawData[4] << 8) | rawData[5]) ;
+	
+	MPU6050->gyroX = MPU6050->gyroData[0] * 250.0 / 32768.0;
+	MPU6050->gyroY = MPU6050->gyroData[1] * 250.0 / 32768.0;
+	MPU6050->gyroZ = MPU6050->gyroData[2] * 250.0 / 32768.0;
 
 	HAL_Delay(200);
 }
 
-void calculateAngles(struct MPU6050 *MPU6050){
-	readAccelData(MPU6050);
+MPU6050_StatusTypeDef calculateAngles(struct MPU6050 *MPU6050){
+	readRawData(MPU6050);
+	
+	float dt = (float)(HAL_GetTick() - MPU6050->timer) / 1000000; // Calculate delta time
+	MPU6050->timer = HAL_GetTick();
+	
 	MPU6050->angleX = atan2(MPU6050->accY, MPU6050->accZ) * RAD_TO_DEG;
 	MPU6050->angleY = atan(-MPU6050->accX / sqrt(MPU6050->accY * MPU6050->accY + MPU6050->accZ * MPU6050->accZ)) * RAD_TO_DEG;
 }
