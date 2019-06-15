@@ -33,4 +33,3 @@ mpu6050\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 mpu6050\mpu6050.o: ../Inc/i2c.h
 mpu6050\mpu6050.o: ../Inc/main.h
 mpu6050\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-mpu6050\mpu6050.o: ../Inc/KalmanFilter.h

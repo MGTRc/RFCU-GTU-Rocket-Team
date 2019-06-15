@@ -120,7 +120,9 @@ int main(void)
   {
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
+		
 		calculateAngles(&MPU6050);
+		HAL_Delay(10);
 		
   }
   /* USER CODE END 3 */

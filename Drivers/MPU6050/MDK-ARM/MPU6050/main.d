@@ -34,4 +34,3 @@ mpu6050\main.o: ../Inc/gpio.h
 mpu6050\main.o: ../Inc/MPU6050.h
 mpu6050\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 mpu6050\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
-mpu6050\main.o: ../Inc/KalmanFilter.h

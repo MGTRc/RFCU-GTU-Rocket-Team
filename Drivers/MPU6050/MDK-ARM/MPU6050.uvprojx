@@ -422,11 +422,6 @@
               <FileType>1</FileType>
               <FilePath>..\Src\MPU6050.c</FilePath>
             </File>
-            <File>
-              <FileName>KalmanFilter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\KalmanFilter.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

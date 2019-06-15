@@ -49,7 +49,6 @@
 #include "stdlib.h"
 #include "i2c.h"
 #include "math.h"
-#include "KalmanFilter.h"
 
 typedef enum{
 	MPU6050_OK,
@@ -59,20 +58,12 @@ typedef enum{
 typedef struct MPU6050{
 	I2C_HandleTypeDef myI2C;
 	uint8_t statusMPU6050;
-	float accOffset[3];
-	float accData[3];
 	float accX,accY,accZ;
-	
-	float gyroData[3];
-	float gyroOffset[3];
-	float gyroX,gyroY,gyroZ;
-	
+	int16_t accData[3];
+	float filtreredAccX,filtreredAccY,filtreredAccZ;
+	float bufferX[10],bufferY[10],bufferZ[10];
 	float angleX,angleY;
 	
-	KALMAN_HandleTypeDef kalmanX;
-	KALMAN_HandleTypeDef kalmanY;
-	
-	long timer;
 	
 }MPU6050_HandleTypeDef;
 
@@ -85,9 +76,11 @@ MPU6050_StatusTypeDef calculateAngles(struct MPU6050 *MPU605);
 void writeByte(struct MPU6050 *MPU6050,uint8_t adress, uint8_t command);
 void readByte(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite);
 void readBytes(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite, uint8_t size);
-void calibrateMPU6050(struct MPU6050 *MPU6050);
+void filterMPU6050(struct MPU6050 *MPU6050);
 void setMPU6050(struct MPU6050 *MPU6050);
 void readRawData(struct MPU6050 *MPU6050);
+void calculateRawAngles(struct MPU6050 *MPU6050);
+void bubble_sort(int16_t arr[], uint16_t n);
 
 #ifdef __cplusplus
 }
