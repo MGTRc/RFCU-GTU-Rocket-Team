@@ -5,6 +5,7 @@
 "bmp180\i2c.o"
 "bmp180\stm32f4xx_it.o"
 "bmp180\stm32f4xx_hal_msp.o"
+"bmp180\bmp180.o"
 "bmp180\stm32f4xx_hal_i2c.o"
 "bmp180\stm32f4xx_hal_i2c_ex.o"
 "bmp180\stm32f4xx_hal_tim.o"
