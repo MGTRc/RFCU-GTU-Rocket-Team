@@ -3,8 +3,6 @@
 BMP180_StatusTypeDef initBMP180(struct BMP180 *BMP180){
 	BMP180->myI2C = hi2c1;
 	BMP180->statusBMP180 = 0;
-	setOverSamplingMode(BMP180, BMP180_HighResolution);
-	
 	return BMP180_OK;
 };
 
@@ -18,11 +16,6 @@ BMP180_StatusTypeDef isBMP180Ready(struct BMP180 *BMP180){
 		return BMP180_ERROR;
 	}
 };
-
-BMP180_StatusTypeDef setOverSamplingMode(struct BMP180 *BMP180, BMP180_OverSamplingMode BMP180_OverSamplingMode){
-	BMP180->BMP180_OverSamplingMode = BMP180_OverSamplingMode;
-	return BMP180_OK;
-}
 
 void readCalibrationValues(struct BMP180 *BMP180){
 	/*int16_t parameters*/
@@ -54,3 +47,48 @@ void writeByte(struct BMP180 *BMP180,uint8_t adress, uint8_t command){
 void readByte (struct BMP180 *BMP180,uint8_t adress, uint8_t *toWrite){
 	HAL_I2C_Mem_Read(&BMP180->myI2C,BMP180_Read_Adress,adress,I2C_MEMADD_SIZE_8BIT,toWrite,1,100);
 };
+
+BMP180_StatusTypeDef calcPressure(struct BMP180 *BMP180){
+	/*read uncompensated temp*/
+	writeByte(BMP180,BMP180_CTRL_MEAS,0xAE);
+	HAL_Delay(14);
+	BMP180->ut = (int32_t)read2Bytes(BMP180,BMP180_OUT_MSB);
+	/*read uncompensated pressure*/
+	writeByte(BMP180,BMP180_CTRL_MEAS,0xB4);
+	HAL_Delay(14);
+	uint8_t msb,lsb,xlsb;
+	readByte(BMP180,BMP180_OUT_MSB,&msb);
+	readByte(BMP180,BMP180_OUT_LSB,&lsb);
+	readByte(BMP180,BMP180_OUT_XLSB,&xlsb);
+	BMP180->up = (int32_t)((msb << 16) + (lsb<<8)) >> (6);
+	/*calculate true temperature*/
+	int32_t x1,x2,x3,b3,b4,b5,b6,b7;
+	x1= (int32_t)((BMP180->ut-BMP180->ac6)*(BMP180->ac5 / pow(2,15)));
+	x2 = (int32_t)((BMP180->mc*pow(2,11))/(x1+BMP180->md));
+	b5 = (int32_t)(x1 + x2);
+	BMP180->temperature =  (int32_t)((b5 + 8)/pow(2,4));
+	BMP180->temperatureDeg = BMP180->temperature * 0.1;
+
+	/*calculate true pressure*/	
+	b6 = b5 - 4000;
+	x1 = (int32_t)(BMP180->b2*(b6*b6/pow(2,12))/pow(2,11));
+	x2 = BMP180->ac2 * b6 / pow(2,11);
+	x3 = x1 + x2;
+	b3 = (int32_t)((((int32_t)BMP180->ac1*4 + x3)<<2) / 4);
+	x1 = (int32_t)((BMP180->ac3 *b6) / pow(2,13));
+	x2 = (int32_t)((BMP180->b1*(b6*b6 / pow(2,12)))/(pow(2,16)));
+	x3 = (int32_t)(((x1+x2)^2)/pow(2,2));
+	b4 = (uint32_t)(BMP180->ac4 * (uint32_t)(x3+32768) / pow(2,15));
+	b7 = (uint32_t)(((uint32_t)BMP180->up) - b3)*(50000>>2);
+	
+	if(b7 < 0x80000000){
+		BMP180->pressure = (b7/b4*2);
+	}
+	
+	x1 = (int32_t)((BMP180->pressure / pow(2,8))*(BMP180->pressure / pow(2,8)));
+ 	x1 = (int32_t)(x1 * 3038 / pow(2,16));
+	x2 = (int32_t)(-7357*BMP180->pressure / pow(2,16));
+	BMP180->pressure = (int32_t)(BMP180->pressure + ((x1 + x2 + 3791) / pow(2,4)));
+	BMP180->pressurehPa = BMP180->pressure * 0.01;
+	return BMP180_OK;
+}

@@ -55,7 +55,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+BMP180_HandleTypeDef BMP180;
+uint8_t who;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -110,7 +111,11 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
+	initBMP180(&BMP180);
+	if(isBMP180Ready(&BMP180)==BMP180_READY){
+		who  = 1;
+	}
+	readCalibrationValues(&BMP180);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,6 +125,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		calcPressure(&BMP180);
   }
   /* USER CODE END 3 */
 }

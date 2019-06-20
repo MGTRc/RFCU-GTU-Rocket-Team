@@ -30,5 +30,6 @@ bmp180\bmp180.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 bmp180\bmp180.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 bmp180\bmp180.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 bmp180\bmp180.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+bmp180\bmp180.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 bmp180\bmp180.o: ../Inc/i2c.h
 bmp180\bmp180.o: ../Inc/main.h

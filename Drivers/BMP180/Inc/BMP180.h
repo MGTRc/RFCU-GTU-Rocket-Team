@@ -35,22 +35,33 @@
 
 #include "stm32f4xx_hal.h"
 #include "stdlib.h"
+#include "math.h"
 #include "i2c.h"
 
 typedef enum{
-	BMP180_UltraLowPower = 0,
-	BMP180_Standart = 1,
-	BMP180_HighResolution = 2,
-	BMP180_UltraHighResolution = 3
+	BMP180_OverSamplingMode_UltraLowPower = 0,
+	BMP180_OverSamplingMode_Standart = 1,
+	BMP180_OverSamplingMode_HighResolution = 2,
+	BMP180_OverSamplingMode_UltraHighResolution = 3
 }BMP180_OverSamplingMode;
 
 typedef enum{
+	BMP180_ControlMeasurement_Pressure = 0x14,
+	BMP180_ControlMeasurement_Temperature = 0x0E
+}BMP180_ControlMeasurement;
+
+typedef enum{
+	BMP180_StartOfConversion_Start = 0x01,
+	BMP180_StartOfConversion_Reset = 0x00
+}BMP180_StartOfConversion;
+
+typedef enum{
 	BMP180_OK,
-	BMP180_ERROR
+	BMP180_ERROR,
+	BMP180_READY
 }BMP180_StatusTypeDef;
 
 typedef struct BMP180{
-	BMP180_OverSamplingMode BMP180_OverSamplingMode;
 	I2C_HandleTypeDef  myI2C;
 	uint8_t statusBMP180;
 	
@@ -58,7 +69,10 @@ typedef struct BMP180{
 	int16_t ac1, ac2, ac3, b1, b2, mb, mc, md;
   uint16_t ac4, ac5, ac6;
 	/*Calculation Parameters*/
-	uint32_t ut,up;
+	int32_t ut,up;
+	/*Output Parameters*/
+	int32_t temperature,pressure;
+	float pressurehPa,temperatureDeg;
 
 }BMP180_HandleTypeDef;
 
@@ -68,7 +82,9 @@ BMP180_StatusTypeDef isBMP180Ready(struct BMP180 *BMP180);
 BMP180_StatusTypeDef calcPressure(struct BMP180 *BMP180);
 
 /*Private Functions*/
-BMP180_StatusTypeDef setOverSamplingMode(struct BMP180 *BMP180, BMP180_OverSamplingMode BMP180_OverSamplingMode);
+void setOverSamplingMode(struct BMP180 *BMP180, BMP180_OverSamplingMode BMP180_OverSamplingMode);
+void setControlMeasument(struct BMP180 *BMP180, BMP180_ControlMeasurement BMP180_ControlMeasurement);
+void setStartOfConversion(struct BMP180 *BMP180, BMP180_StartOfConversion BMP180_StartOfConversion);
 void writeByte(struct BMP180 *BMP180,uint8_t adress, uint8_t command);
 void readByte (struct BMP180 *BMP180,uint8_t adress, uint8_t *toWrite);
 void readCalibrationValues(struct BMP180 *BMP180);
