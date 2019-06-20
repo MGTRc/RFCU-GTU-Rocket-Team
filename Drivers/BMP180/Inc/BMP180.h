@@ -2,7 +2,7 @@
  * @file		BMP180.h																								
  * @author   Mete Can Gazi																										
  * @brief      BMP180 Libray for Rocket Application							
- * @revision 17.06.2019
+ * @revision 20.06.2019
  **/
 
 #ifndef  _BMP180_H
@@ -13,8 +13,8 @@
 #endif
 
 /*Device I2C Adresses*/
-#define BMP180_Write_Adress 0x00
-#define BMP180_Read_Adress 0x00
+#define BMP180_Write_Adress 0xEF
+#define BMP180_Read_Adress 0xEE
 #define BMP180_OUT_XLSB 0xF8
 #define BMP180_OUT_LSB 0xF7
 #define BMP180_OUT_MSB 0xF6
