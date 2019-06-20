@@ -116,6 +116,7 @@ int main(void)
 		who  = 1;
 	}
 	readCalibrationValues(&BMP180);
+	BMP180.refPressure = 101325;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -126,6 +127,8 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		calcPressure(&BMP180);
+		calcAbsAltitude(&BMP180);
+		HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }

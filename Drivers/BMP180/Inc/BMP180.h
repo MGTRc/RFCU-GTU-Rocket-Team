@@ -71,8 +71,8 @@ typedef struct BMP180{
 	/*Calculation Parameters*/
 	int32_t ut,up;
 	/*Output Parameters*/
-	int32_t temperature,pressure;
-	float pressurehPa,temperatureDeg;
+	int32_t temperature,pressure,refPressure;
+	float pressurehPa,temperatureDeg,absAltitude;
 
 }BMP180_HandleTypeDef;
 
@@ -80,6 +80,7 @@ typedef struct BMP180{
 BMP180_StatusTypeDef initBMP180(struct BMP180 *BMP180);
 BMP180_StatusTypeDef isBMP180Ready(struct BMP180 *BMP180);
 BMP180_StatusTypeDef calcPressure(struct BMP180 *BMP180);
+BMP180_StatusTypeDef calcAbsAltitude(struct BMP180 *BMP180);
 
 /*Private Functions*/
 void setOverSamplingMode(struct BMP180 *BMP180, BMP180_OverSamplingMode BMP180_OverSamplingMode);
@@ -88,6 +89,7 @@ void setStartOfConversion(struct BMP180 *BMP180, BMP180_StartOfConversion BMP180
 void writeByte(struct BMP180 *BMP180,uint8_t adress, uint8_t command);
 void readByte (struct BMP180 *BMP180,uint8_t adress, uint8_t *toWrite);
 void readCalibrationValues(struct BMP180 *BMP180);
+void calcReferencePressure(struct BMP180 *BMP180);
 uint16_t read2Bytes(struct BMP180 *BMP180, uint8_t adress);
 
 #ifdef __cplusplus
