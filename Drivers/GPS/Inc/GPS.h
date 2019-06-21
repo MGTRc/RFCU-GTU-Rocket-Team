@@ -39,6 +39,8 @@ typedef struct GPS{
 GPS_StatusTypeDef initGPS(struct GPS *GPS);
 GPS_StatusTypeDef parseGPS(struct GPS *GPS);
 
+void clearAllPosition(struct GPS *GPS);
+
 #ifdef __cplusplus
 }
 #endif

@@ -2,7 +2,6 @@
 
 GPS_StatusTypeDef initGPS(struct GPS *GPS){
 	GPS->gpsIndex = 0;
-	GPS->gpsStatus = 0;
 	GPS->packageFind = 0;
 	HAL_Delay(1000);
 	uint8_t buffer,status;
@@ -35,11 +34,13 @@ GPS_StatusTypeDef parseGPS(struct GPS *GPS){
 	
 	GPS->lat = (uint8_t*)calloc(sizeof(uint8_t) , GPS->commoIndex[3]-GPS->commoIndex[2]);
 	GPS->lat = &GPS->gpsBuffer[GPS->commoIndex[2]+1] ;
-	GPS->latitude = atof((char*)GPS->lat) / 100;
+	GPS->latitude = atof((char*)GPS->lat);
 	
 	GPS->lon = (uint8_t*)calloc(sizeof(uint8_t) , GPS->commoIndex[5]-GPS->commoIndex[4]);
 	GPS->lon = &GPS->gpsBuffer[GPS->commoIndex[4]+1] ;
-	GPS->longtitude = atof((char*)GPS->lon) / 100;
+	GPS->longtitude = atof((char*)GPS->lon);
+	
+	clearAllPosition(GPS);
 	
 	GPS->alt = (uint8_t*)calloc(sizeof(uint8_t) , GPS->commoIndex[7]-GPS->commoIndex[6]);
 	GPS->alt= &GPS->gpsBuffer[GPS->commoIndex[6]+1] ;
@@ -60,3 +61,11 @@ GPS_StatusTypeDef parseGPS(struct GPS *GPS){
 	return GPS_OK;
 
 };
+
+void clearAllPosition(struct GPS *GPS){
+	for(uint8_t i = 0; i<11; i++){
+		*(GPS->lat + i) = 0;
+		*(GPS->lon + i) = 0;
+	}
+
+}
