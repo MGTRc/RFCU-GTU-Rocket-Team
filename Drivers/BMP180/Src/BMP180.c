@@ -99,6 +99,6 @@ void calcReferencePressure(struct BMP180 *BMP180){
 };
 
 BMP180_StatusTypeDef calcAbsAltitude(struct BMP180 *BMP180){
-	BMP180->absAltitude = (float)((BMP180->pressure - BMP180->refPressure)*0.01*8.43);
+	BMP180->absAltitude = (float)((BMP180->pressure - BMP180->refPressure)*0.01*8.43)*-1.0;
 	return BMP180_OK;
 }

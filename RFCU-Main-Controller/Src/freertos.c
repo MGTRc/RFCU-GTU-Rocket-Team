@@ -56,7 +56,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
-
+#include "BMP180.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -76,7 +76,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+BMP180_HandleTypeDef BMP180;
+uint8_t deneme;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 osThreadId myTask02Handle;
@@ -178,10 +179,16 @@ void StartDefaultTask(void const * argument)
 void StartTask02(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
+	initBMP180(&BMP180);
+	isBMP180Ready(&BMP180);
+	readCalibrationValues(&BMP180);
+	BMP180.refPressure = 101325;
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+	calcPressure(&BMP180);
+	calcAbsAltitude(&BMP180);
+	osDelay(1);
   }
   /* USER CODE END StartTask02 */
 }
