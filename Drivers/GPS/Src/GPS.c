@@ -1,9 +1,14 @@
 #include "GPS.h"
 
+/**
+* @brief This function init GPS Library.
+**/
 GPS_StatusTypeDef initGPS(struct GPS *GPS){
 	GPS->gpsIndex = 0;
 	GPS->packageFind = 0;
 	HAL_Delay(1000);
+	
+	/*Sync. Transmitter*/
 	uint8_t buffer,status;
 	status = 1;
 	while(status){
@@ -15,6 +20,9 @@ GPS_StatusTypeDef initGPS(struct GPS *GPS){
 	}
 };
 
+/**
+* @brief This function parses GPS Data;
+**/
 GPS_StatusTypeDef parseGPS(struct GPS *GPS){
 	uint8_t index = 0;
 	uint8_t commo = 0;
@@ -40,8 +48,6 @@ GPS_StatusTypeDef parseGPS(struct GPS *GPS){
 	GPS->lon = &GPS->gpsBuffer[GPS->commoIndex[4]+1] ;
 	GPS->longtitude = atof((char*)GPS->lon);
 	
-	clearAllPosition(GPS);
-	
 	GPS->alt = (uint8_t*)calloc(sizeof(uint8_t) , GPS->commoIndex[7]-GPS->commoIndex[6]);
 	GPS->alt= &GPS->gpsBuffer[GPS->commoIndex[6]+1] ;
 	GPS->altitude = atof((char*)GPS->alt);
@@ -59,13 +65,7 @@ GPS_StatusTypeDef parseGPS(struct GPS *GPS){
 	GPS->satellite = atoi((char*)GPS->sat);
 	
 	return GPS_OK;
-
 };
 
-void clearAllPosition(struct GPS *GPS){
-	for(uint8_t i = 0; i<11; i++){
-		*(GPS->lat + i) = 0;
-		*(GPS->lon + i) = 0;
-	}
 
-}
+

@@ -189,6 +189,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		GPS.gpsIndex = 0;
 		GPS.packageFind = 0;
 	 }
+	 
 	 HAL_UART_Receive_DMA(&huart1,&GPS.checkBuffer,1);
 	}
 }
