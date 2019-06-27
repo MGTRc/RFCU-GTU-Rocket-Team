@@ -56,7 +56,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
-#include "BMP180.h"
+#include "SDCARD.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -76,7 +76,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-BMP180_HandleTypeDef BMP180;
 uint8_t deneme;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
@@ -96,6 +95,7 @@ void StartTask03(void const * argument);
 void StartTask04(void const * argument);
 void StartTask05(void const * argument);
 
+extern void MX_FATFS_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -159,7 +159,10 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-
+  /* init code for FATFS */
+  MX_FATFS_Init();
+  initSDCARD(&SDCARD);
+  deneme = SDCARD.SDCARDStatus;
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)
@@ -179,16 +182,10 @@ void StartDefaultTask(void const * argument)
 void StartTask02(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
-	initBMP180(&BMP180);
-	isBMP180Ready(&BMP180);
-	readCalibrationValues(&BMP180);
-	BMP180.refPressure = 101325;
   /* Infinite loop */
   for(;;)
   {
-	calcPressure(&BMP180);
-	calcAbsAltitude(&BMP180);
-	osDelay(1);
+    osDelay(1);
   }
   /* USER CODE END StartTask02 */
 }

@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\..\SDCARD\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -418,14 +418,19 @@
               <FilePath>../Src/stm32f4xx_hal_msp.c</FilePath>
             </File>
             <File>
-              <FileName>BMP180.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Inc\BMP180.h</FilePath>
-            </File>
-            <File>
               <FileName>BMP180.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\BMP180.c</FilePath>
+            </File>
+            <File>
+              <FileName>SDCARD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\SDCARD\Src\SDCARD.c</FilePath>
+            </File>
+            <File>
+              <FileName>COMMON.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Common\COMMON.c</FilePath>
             </File>
           </Files>
         </Group>

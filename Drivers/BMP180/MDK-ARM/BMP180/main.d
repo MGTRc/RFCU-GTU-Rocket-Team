@@ -34,3 +34,5 @@ bmp180\main.o: ../Inc/gpio.h
 bmp180\main.o: ../Inc/BMP180.h
 bmp180\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 bmp180\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+bmp180\main.o: ..\..\SDCARD\Inc\SDCARD.h
+bmp180\main.o: ..\..\SDCARD\Inc\fatfs.h

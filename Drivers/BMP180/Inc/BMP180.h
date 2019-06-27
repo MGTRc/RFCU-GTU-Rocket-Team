@@ -91,6 +91,7 @@ void readByte (struct BMP180 *BMP180,uint8_t adress, uint8_t *toWrite);
 void readCalibrationValues(struct BMP180 *BMP180);
 void calcReferencePressure(struct BMP180 *BMP180);
 uint16_t read2Bytes(struct BMP180 *BMP180, uint8_t adress);
+void bubblesort(int32_t *list, uint32_t n);
 
 #ifdef __cplusplus
 }

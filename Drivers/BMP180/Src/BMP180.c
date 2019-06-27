@@ -94,11 +94,39 @@ BMP180_StatusTypeDef calcPressure(struct BMP180 *BMP180){
 }
 
 void calcReferencePressure(struct BMP180 *BMP180){
-	calcPressure(BMP180);
-	BMP180->refPressure = BMP180->pressure;
+	readCalibrationValues(BMP180);
+	
+	int32_t *buffer = (int32_t*)calloc(sizeof(int32_t),100);
+	
+	for(uint8_t i=0; i<100; i++){
+		calcPressure(BMP180);
+		*(buffer+i) = BMP180->pressure;
+	}
+	
+	bubblesort(buffer,100);
+	BMP180->refPressure = *(buffer+50);
+	
+	free(buffer);
 };
 
 BMP180_StatusTypeDef calcAbsAltitude(struct BMP180 *BMP180){
 	BMP180->absAltitude = (float)((BMP180->pressure - BMP180->refPressure)*0.01*8.43)*-1.0;
 	return BMP180_OK;
-}
+};
+
+void bubblesort(int32_t *list, uint32_t n){
+		int32_t c, d, t;
+	 
+		for (c = 0 ; c < n - 1; c++)
+		{
+			for (d = 0 ; d < n - c - 1; d++)
+			{
+				if (list[d] > list[d+1])
+				{
+					t = list[d];
+					list[d] = list[d+1];
+					list[d+1] = t;
+				}
+			}
+		}
+};

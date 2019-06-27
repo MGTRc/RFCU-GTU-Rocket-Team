@@ -46,6 +46,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "BMP180.h"
+#include "SDCARD.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -112,11 +113,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 	initBMP180(&BMP180);
-	if(isBMP180Ready(&BMP180)==BMP180_READY){
-		who  = 1;
-	}
-	readCalibrationValues(&BMP180);
-	BMP180.refPressure = 101325;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
