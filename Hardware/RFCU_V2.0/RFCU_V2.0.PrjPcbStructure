@@ -1,5 +1,6 @@
 Record=TopLevelDocument|FileName=RFCU_V2.0.SchDoc
 Record=SheetSymbol|SourceDocument=RFCU_V2.0.SchDoc|Designator=Communacation|SchDesignator=Communacation|FileName=com.SchDoc|SymbolType=Normal|RawFileName=com.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=RFCU_V2.0.SchDoc|Designator=Ejection|SchDesignator=Ejection|FileName=ejection.SchDoc|SymbolType=Normal|RawFileName=ejection.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
 Record=SheetSymbol|SourceDocument=RFCU_V2.0.SchDoc|Designator=MCU|SchDesignator=MCU|FileName=MCU.SchDoc|SymbolType=Normal|RawFileName=MCU.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
 Record=SheetSymbol|SourceDocument=RFCU_V2.0.SchDoc|Designator=Power|SchDesignator=Power|FileName=power.SchDoc|SymbolType=Normal|RawFileName=power.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
 Record=SheetSymbol|SourceDocument=RFCU_V2.0.SchDoc|Designator=Sensor|SchDesignator=Sensor|FileName=sensor.SchDoc|SymbolType=Normal|RawFileName=sensor.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
