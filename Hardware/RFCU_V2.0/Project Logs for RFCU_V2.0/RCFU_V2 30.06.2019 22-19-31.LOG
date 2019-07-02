@@ -1,0 +1,4 @@
+Added Pin To Net: NetName=OSC_IN_N Pin=C2-1
+Added Pin To Net: NetName=OSC_OUT_N Pin=C10-1
+Added Pin To Net: NetName=OSC_IN_N Pin=Y2-1
+Added Pin To Net: NetName=OSC_OUT_N Pin=Y2-2

@@ -23,7 +23,7 @@ SDCARD_StatusTypeDef initSDCARD(struct SDCARD *SDCARD){
 	 
 	 
 	f_open(&SDCARD->logFile,"rocket.txt",FA_WRITE);
-	f_printf(&SDCARD->logFile,"GTU Roket Takimi - BMP180 Test Datasi\n");
+	f_printf(&SDCARD->logFile,"GTU Roket Takimi - Ucus Test Datasi\n");
 	f_close(&SDCARD->logFile);
 	 
 	 

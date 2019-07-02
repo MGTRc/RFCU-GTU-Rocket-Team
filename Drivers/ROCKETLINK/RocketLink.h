@@ -15,8 +15,8 @@
 #include "stm32f4xx_hal.h"
 #include "stdlib.h"
 
-#define startByte 					35
-#define finishByte 					36
+#define startByte 					36
+#define finishByte 					35
 
 typedef enum{
 		RocketLink_ERROR = 0,
@@ -97,7 +97,7 @@ RocketLink_StatusTypeDef setGPSAlt(struct RocketLink *RocketLink, float gpsalt);
 RocketLink_StatusTypeDef setGPSLat(struct RocketLink *RocketLink, float gpslat);
 RocketLink_StatusTypeDef setGPSLong(struct RocketLink *RocketLink, float gpslong);
 RocketLink_StatusTypeDef setAngle(struct RocketLink *RocketLink, int8_t gpslong);
-RocketLink_StatusTypeDef setSensorStatus(struct RocketLink *RocketLink, RocketLink_SensorStatus SensorStatus, RocketLink_StatusTypeDef  Status);
+RocketLink_StatusTypeDef setSensorStatus(struct RocketLink *RocketLink, RocketLink_SensorStatus SensorStatus);
 
 void setBit(struct RocketLink *RocketLink, uint8_t bitOrder);
 

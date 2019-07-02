@@ -1,0 +1,11 @@
+Added Component: Designator=U2(TSOP-23)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetC15_1 Pin=U2-1
+Added Pin To Net: NetName=NetR3_2 Pin=U2-2
+Added Pin To Net: NetName=NetC14_1 Pin=U2-3
+Added Pin To Net: NetName=NetR4_1 Pin=U2-4
+Added Pin To Net: NetName=VSS1 Pin=U2-5
+Added Pin To Net: NetName=NetC12_2 Pin=U2-6
+Added Pin To Net: NetName=VBAT Pin=U2-7
+Added Pin To Net: NetName=NetC12_1 Pin=U2-8
+Added Member To Class: ClassName=Power Member=Component U2 MP1472

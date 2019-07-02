@@ -1,0 +1,12 @@
+Change Component Footprint: Designator=R2 Old Footprint=0805-RES New Footprint=AXIAL-0.3
+Added Component: Designator=U5(MSOP10)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=SCK Pin=U5-1
+Added Pin To Net: NetName=CS2 Pin=U5-2
+Added Pin To Net: NetName=VSS1 Pin=U5-3
+Added Pin To Net: NetName=VDD1 Pin=U5-8
+Added Pin To Net: NetName=MOSI Pin=U5-9
+Added Pin To Net: NetName=MISO Pin=U5-10
+Added Member To Class: ClassName=Power Member=Component D? LED0
+Added Member To Class: ClassName=Power Member=Component R? Res1
+Added Member To Class: ClassName=Sensor Member=Component U5 ADS1118
