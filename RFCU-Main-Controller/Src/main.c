@@ -24,6 +24,7 @@
 #include "fatfs.h"
 #include "i2c.h"
 #include "sdio.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -58,6 +59,7 @@
 /* USER CODE BEGIN PV */
 BMP180_HandleTypeDef BMP180;
 MPU6050_HandleTypeDef MPU6050;
+uint32_t serialCheck = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -107,11 +109,12 @@ int main(void)
   MX_USART2_UART_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
+  	HAL_TIM_Base_Start_IT(&htim4);
 	initRocketLink(&RocketLink);
 	initRocketLinkPackage(&RocketLink);
-	/*
+
 	initBMP180(&BMP180,hi2c2);
 
 	if(isBMP180Ready(&BMP180) == BMP180_OK){
@@ -129,7 +132,6 @@ int main(void)
 	}
 
 	initSDCARD(&SDCARD);
-	*/
 
 
   /* USER CODE END 2 */
@@ -139,10 +141,17 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	calcPressure(&BMP180);
+	calcAbsAltitude(&BMP180);
+	calculateAngles(&MPU6050);
     /* USER CODE BEGIN 3 */
+	setPressure(&RocketLink,BMP180.pressurehPa);
+
+
+	if(serialCheck == 1){
 		HAL_UART_Transmit(&huart2,RocketLink.sendPackage,128,100);
-		HAL_Delay(2000);
+		serialCheck = 0;
+	}
 
   }
   /* USER CODE END 3 */
@@ -192,6 +201,14 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* Prevent unused argument(s) compilation warning */
+  serialCheck = 1;
+  /* NOTE : This function should not be modified, when the callback is needed,
+            the HAL_TIM_PeriodElapsedCallback could be implemented in the user file
+   */
+}
 
 /*
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)

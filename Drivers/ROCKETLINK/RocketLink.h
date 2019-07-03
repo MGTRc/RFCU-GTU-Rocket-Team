@@ -99,6 +99,8 @@ RocketLink_StatusTypeDef setGPSLong(struct RocketLink *RocketLink, float gpslong
 RocketLink_StatusTypeDef setAngle(struct RocketLink *RocketLink, int8_t gpslong);
 RocketLink_StatusTypeDef setSensorStatus(struct RocketLink *RocketLink, RocketLink_SensorStatus SensorStatus);
 
+void floatToUint8(float dataIn, uint8_t *adress);
+
 void setBit(struct RocketLink *RocketLink, uint8_t bitOrder);
 
 #ifdef __cplusplus
