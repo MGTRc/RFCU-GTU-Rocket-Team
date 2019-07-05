@@ -25,17 +25,17 @@ typedef enum{
 }RocketLink_StatusTypeDef;
 
 typedef enum{
-		PREPARING																								= 0,
-		BAROMETER_CALIBRATING												= 1,
-		ACC_CALIBRATING																		= 2,
-		READY_FOR_IGNITION 															= 3,
-		EJECTED 																									= 4,
-		ALTITUDE_THRESHOLD															= 5,
-		APOGEE																										= 6,
-		PARACHUTE_PAYLOAD_DEPLOYED					= 7,
-		DESCENTING																							= 8,
-		LANDED																											= 9,
-		WAITING_FOR_RESCUE															= 10
+		PREPARING = 0,
+		BAROMETER_CALIBRATING = 1,
+		ACC_CALIBRATING = 2,
+		READY_FOR_IGNITION = 3,
+		EJECTED = 4,
+		ALTITUDE_THRESHOLD = 5,
+		APOGEE = 6,
+		PARACHUTE_PAYLOAD_DEPLOYED = 7,
+		DESCENTING = 8,
+		LANDED	= 9,
+		WAITING_FOR_RESCUE	= 10
 }RocketLink_Stage;
 
 typedef enum{
@@ -44,7 +44,6 @@ typedef enum{
 	IMU_IS_READY = 2,
 	IMU_CALIBRATION = 3,
 	GPS_IS_READY = 4,
-	GPS_CALIBRATION = 5
 }RocketLink_SensorStatus;
 
 typedef struct{
@@ -55,27 +54,9 @@ typedef struct{
 
 typedef  struct RocketLink{
 	RocketLink_InitTypeDef RocketLink_Init;
-	
 	//Rocket Dynamic Parameters
-	uint8_t sendPackage[128];
-	
-	//uintx_t Parameters
-	uint8_t rocketStage;
-	uint8_t rocketAngle;
 	uint8_t sensorStatus;
-		
-	//float Parameters
-	float rocketBatteryVoltage;
-	float rocketBusVoltage;
-	float rocketCurrent;
-	float rocketRFCUTemp;
-	float rocketPressure;
-	float rocketBarometricAlt;
-	float rocketBarometricTemp;
-	float rocketGPSAlt;
-	float rocketGPSLat;
-	float rocketGPSLong;
-	//
+	uint8_t sendPackage[128];
 	uint16_t parameterCheck;
 	uint8_t error;
 	
@@ -93,14 +74,19 @@ RocketLink_StatusTypeDef setRFCUTemp(struct RocketLink *RocketLink, float temp);
 RocketLink_StatusTypeDef setPressure(struct RocketLink *RocketLink, float pressure);
 RocketLink_StatusTypeDef setBarometricAlt(struct RocketLink *RocketLink, float baroalt);
 RocketLink_StatusTypeDef setBarometricTemp(struct RocketLink *RocketLink, float barotemp);
-RocketLink_StatusTypeDef setGPSAlt(struct RocketLink *RocketLink, float gpsalt);
+/*GPS Parameters*/
 RocketLink_StatusTypeDef setGPSLat(struct RocketLink *RocketLink, float gpslat);
 RocketLink_StatusTypeDef setGPSLong(struct RocketLink *RocketLink, float gpslong);
+RocketLink_StatusTypeDef setGPSAlt(struct RocketLink *RocketLink, float gpsalt);
+RocketLink_StatusTypeDef setGPSHdop(struct RocketLink *RocketLink, float hdop);
+RocketLink_StatusTypeDef setGPSSatelliteNumber(struct RocketLink *RocketLink, uint8_t satelliteNumber);
+/*Acc. Parameters*/
 RocketLink_StatusTypeDef setAngle(struct RocketLink *RocketLink, int8_t gpslong);
 RocketLink_StatusTypeDef setSensorStatus(struct RocketLink *RocketLink, RocketLink_SensorStatus SensorStatus);
 
 void floatToUint8(float dataIn, uint8_t *adress);
-
+void uint16tToUint8(uint16_t dataIn, uint8_t *adress);
+void int16tToUint8(uint16_t dataIn, uint8_t *adress);
 void setBit(struct RocketLink *RocketLink, uint8_t bitOrder);
 
 #ifdef __cplusplus

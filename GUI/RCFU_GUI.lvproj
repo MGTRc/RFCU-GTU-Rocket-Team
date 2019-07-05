@@ -11,7 +11,6 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="DataSeperator.vi" Type="VI" URL="../DataSeperator.vi"/>
-		<Item Name="GMaps Library.lvlib" Type="Library" URL="../GMaps Library.lvlib"/>
 		<Item Name="GUI_V1.0.vi" Type="VI" URL="../GUI_V1.0.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">

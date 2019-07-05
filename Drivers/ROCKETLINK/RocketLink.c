@@ -7,7 +7,6 @@ RocketLink_StatusTypeDef initRocketLink(struct RocketLink *RocketLink){
 	RocketLink->RocketLink_Init.RCFUID = 1;			// RFCU ID;
 	RocketLink->RocketLink_Init.compID = 1;			// Component ID;
 
-	RocketLink->rocketStage = PREPARING;
 	RocketLink->parameterCheck = 0;
 	RocketLink->error = 0;
 
@@ -22,22 +21,11 @@ RocketLink_StatusTypeDef initRocketLinkPackage(struct RocketLink *RocketLink){
 	RocketLink->sendPackage[4] = RocketLink->RocketLink_Init.compID;
 
 	for(int i=13; i<126; i++){
-		RocketLink->sendPackage[i] = 77;
+		RocketLink->sendPackage[i] = 0;
 	}
 
 	RocketLink->sendPackage[126] = finishByte;
 	RocketLink->sendPackage[127] = finishByte;
-	return RocketLink_OK;
-};
-
-RocketLink_StatusTypeDef setRocketStage(struct RocketLink *RocketLink, RocketLink_Stage Stage){
-	RocketLink->rocketStage |= 1 << Stage;
-	return RocketLink_OK;
-};
-
-RocketLink_StatusTypeDef setBatteryVoltage(struct RocketLink *RocketLink, float batteryVoltage){
-	RocketLink->rocketBatteryVoltage = batteryVoltage;
-	setBit(RocketLink,0);
 	return RocketLink_OK;
 };
 
@@ -67,8 +55,23 @@ void floatToUint8(float dataIn, uint8_t *adress){
 		*(adress+0) = (number.raw.exponent >> 1) | (number.raw.sign << 7);
 };
 
-RocketLink_StatusTypeDef setPressure(struct RocketLink *RocketLink, float pressure){
-	floatToUint8(pressure, (RocketLink->sendPackage+5));
-	return RocketLink_OK;
+void uint16tToUint8(uint16_t dataIn, uint8_t *adress){
+	*(adress + 0) = 0x00 | (dataIn >> 8);
+	*(adress + 1) |= dataIn;
 };
+
+RocketLink_StatusTypeDef setGPSLat(struct RocketLink *RocketLink, float gpslat){
+	floatToUint8(gpslat,(RocketLink->sendPackage+5));
+	return RocketLink_OK;
+}
+
+RocketLink_StatusTypeDef setGPSLong(struct RocketLink *RocketLink, float gpslong){
+	floatToUint8(gpslong,(RocketLink->sendPackage+9));
+	return RocketLink_OK;
+}
+
+RocketLink_StatusTypeDef setGPSHdop(struct RocketLink *RocketLink, float hdop){
+	uint16tToUint8((uint16_t)(hdop*10),(RocketLink->sendPackage+13));
+	return RocketLink_OK;
+}
 

@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=OSC32_OUT Pin=Y1-2
+Change Component Footprint: Designator=Y2 Old Footprint=HC49-Crystal New Footprint=HC49 Crystal SMD
+Change Component Footprint: Designator=Y1 Old Footprint=R38 New Footprint=MC-306 SMD
+Added Pin To Net: NetName=OSC32_OUT Pin=Y1-4

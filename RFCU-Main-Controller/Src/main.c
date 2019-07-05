@@ -59,7 +59,7 @@
 /* USER CODE BEGIN PV */
 BMP180_HandleTypeDef BMP180;
 MPU6050_HandleTypeDef MPU6050;
-uint32_t serialCheck = 0;
+GPS_HandleTypeDef GPS;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -115,6 +115,15 @@ int main(void)
 	initRocketLink(&RocketLink);
 	initRocketLinkPackage(&RocketLink);
 
+	/*GPS Start*/
+	initGPS(&GPS,huart1);
+
+	if(isGPSReady(&GPS) == GPS_OK){
+		setSensorStatus(&RocketLink,GPS_IS_READY);
+	}
+	/*GPS Finish*/
+
+	/*BMP180 Start*/
 	initBMP180(&BMP180,hi2c2);
 
 	if(isBMP180Ready(&BMP180) == BMP180_OK){
@@ -124,14 +133,15 @@ int main(void)
 	if(calibrateBMP180(&BMP180) == BMP180_OK){
 		setSensorStatus(&RocketLink,BAROMETER_CALIBRATION);
 	}
+	/*BMP180 Finish*/
 
+	/*MPU6050 Start*/
 	initMPU6050(&MPU6050,hi2c1);
 
 	if(isMPU6050Ready(&MPU6050)==MPU6050_OK){
 		setSensorStatus(&RocketLink,IMU_IS_READY);
 	}
-
-	initSDCARD(&SDCARD);
+	/*MPU6050 Finish*/
 
 
   /* USER CODE END 2 */
@@ -141,17 +151,12 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	calcPressure(&BMP180);
-	calcAbsAltitude(&BMP180);
-	calculateAngles(&MPU6050);
+	 setGPSLat(&RocketLink,GPS.latitude);
+	 setGPSLong(&RocketLink,GPS.longtitude);
+	 setGPSHdop(&RocketLink,GPS.hdop);
+	 setGPS
+	 HAL_UART_Transmit(&huart2,RocketLink.sendPackage,128,1000);
     /* USER CODE BEGIN 3 */
-	setPressure(&RocketLink,BMP180.pressurehPa);
-
-
-	if(serialCheck == 1){
-		HAL_UART_Transmit(&huart2,RocketLink.sendPackage,128,100);
-		serialCheck = 0;
-	}
 
   }
   /* USER CODE END 3 */
@@ -201,16 +206,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* Prevent unused argument(s) compilation warning */
-  serialCheck = 1;
-  /* NOTE : This function should not be modified, when the callback is needed,
-            the HAL_TIM_PeriodElapsedCallback could be implemented in the user file
-   */
-}
 
-/*
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart->Instance == USART1){
@@ -231,7 +227,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	 HAL_UART_Receive_DMA(&huart1,&GPS.checkBuffer,1);
 	}
 }
-*/
 
 /* USER CODE END 4 */
 

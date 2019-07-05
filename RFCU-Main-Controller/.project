@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>RFCU-Main-Controller</name>
-	<comment></comment>
+	<comment />
 	<projects>
 	</projects>
 	<buildSpec>
@@ -15,7 +15,7 @@
 				</dictionary>
 				<dictionary>
 					<key>?name?</key>
-					<value></value>
+					<value />
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.append_environment</key>
@@ -23,7 +23,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value></value>
+					<value />
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildCommand</key>
@@ -74,27 +74,27 @@
 		<link>
 			<name>Src/BMP180.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BMP180/BMP180.c</locationURI>
+			<location>PARENT-1-PROJECT_LOC/Drivers/BMP180/BMP180.c</location>
 		</link>
 		<link>
 			<name>Src/GPS.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/GPS/GPS.c</locationURI>
+			<location>PARENT-1-PROJECT_LOC/Drivers/GPS/GPS.c</location>
 		</link>
 		<link>
 			<name>Src/MPU6050.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/MPU6050/MPU6050.c</locationURI>
+			<location>PARENT-1-PROJECT_LOC/Drivers/MPU6050/MPU6050.c</location>
 		</link>
 		<link>
 			<name>Src/RocketLink.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/ROCKETLINK/RocketLink.c</locationURI>
+			<location>PARENT-1-PROJECT_LOC/Drivers/ROCKETLINK/RocketLink.c</location>
 		</link>
 		<link>
 			<name>Src/SDCARD.c</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/SDCARD/SDCARD.c</locationURI>
+			<location>PARENT-1-PROJECT_LOC/Drivers/SDCARD/SDCARD.c</location>
 		</link>
 	</linkedResources>
 </projectDescription>

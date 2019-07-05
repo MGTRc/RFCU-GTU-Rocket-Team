@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=Sense_BUS Pin=F1-1
+Removed Pin From Net: NetName=VDD1 Pin=R9-2
+Removed Member From Class: ClassName=Power Member=F1
+Added Pin To Net: NetName=Sense_BUS Pin=R9-2
+Added Member To Class: ClassName=MCU Member=Component Y1 32.768 kHz
