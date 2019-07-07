@@ -2,7 +2,9 @@
 
 RocketLink_HandleTypeDef RocketLink;
 
-RocketLink_StatusTypeDef initRocketLink(struct RocketLink *RocketLink){
+RocketLink_StatusTypeDef initRocketLink(struct RocketLink *RocketLink , UART_HandleTypeDef myUART){
+	RocketLink->myUART = myUART;
+
 	RocketLink->RocketLink_Init.teamID = 212;   // Team ID;
 	RocketLink->RocketLink_Init.RCFUID = 1;			// RFCU ID;
 	RocketLink->RocketLink_Init.compID = 1;			// Component ID;
@@ -31,11 +33,6 @@ RocketLink_StatusTypeDef initRocketLinkPackage(struct RocketLink *RocketLink){
 
 void setBit(struct RocketLink *RocketLink, uint8_t bitOrder){
 	RocketLink->parameterCheck |= 0x01 << bitOrder;
-};
-
-RocketLink_StatusTypeDef setSensorStatus(struct RocketLink *RocketLink, RocketLink_SensorStatus SensorStatus){
-	RocketLink->sensorStatus |= (0x01) << SensorStatus;
-	return RocketLink_OK;
 };
 
 void floatToUint8(float dataIn, uint8_t *adress){
@@ -68,10 +65,30 @@ RocketLink_StatusTypeDef setGPSLat(struct RocketLink *RocketLink, float gpslat){
 RocketLink_StatusTypeDef setGPSLong(struct RocketLink *RocketLink, float gpslong){
 	floatToUint8(gpslong,(RocketLink->sendPackage+9));
 	return RocketLink_OK;
-}
+};
 
 RocketLink_StatusTypeDef setGPSHdop(struct RocketLink *RocketLink, float hdop){
-	uint16tToUint8((uint16_t)(hdop*10),(RocketLink->sendPackage+13));
+	floatToUint8(hdop,(RocketLink->sendPackage+13));
 	return RocketLink_OK;
-}
+};
+
+RocketLink_StatusTypeDef setGPSAlt(struct RocketLink *RocketLink, float gpsalt){
+	floatToUint8(gpsalt,(RocketLink->sendPackage+17));
+	return RocketLink_OK;
+};
+
+RocketLink_StatusTypeDef setGPSSatelliteNumber(struct RocketLink *RocketLink, uint8_t satelliteNumber){
+	RocketLink->sendPackage[15] = satelliteNumber;
+	return RocketLink_OK;
+};
+
+RocketLink_StatusTypeDef setSensorStatus(struct RocketLink *RocketLink, RocketLink_SensorStatus SensorStatus){
+	RocketLink->sendPackage[27] |= (0x01) << SensorStatus;
+	return RocketLink_OK;
+};
+
+RocketLink_StatusTypeDef setRocketStage(struct RocketLink *RocketLink, RocketLink_Stage Stage){
+	RocketLink->sendPackage[28] |= (0x01) << Stage;
+	return RocketLink_OK;
+};
 

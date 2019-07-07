@@ -46,7 +46,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+void sendInfo(void);
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -111,16 +111,22 @@ int main(void)
   MX_FATFS_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-  	HAL_TIM_Base_Start_IT(&htim4);
-	initRocketLink(&RocketLink);
+  	HAL_Delay(5000);
+  	/*Rocket Link Start*/
+	initRocketLink(&RocketLink,huart2);
 	initRocketLinkPackage(&RocketLink);
+	setRocketStage(&RocketLink,PREPARING);
+	sendInfo();
+	/*RocketLink Finish*/
 
 	/*GPS Start*/
+	setSensorStatus(&RocketLink,GPS_CALIBRATION);
+	sendInfo();
 	initGPS(&GPS,huart1);
-
 	if(isGPSReady(&GPS) == GPS_OK){
 		setSensorStatus(&RocketLink,GPS_IS_READY);
 	}
+	sendInfo();
 	/*GPS Finish*/
 
 	/*BMP180 Start*/
@@ -129,19 +135,28 @@ int main(void)
 	if(isBMP180Ready(&BMP180) == BMP180_OK){
 		setSensorStatus(&RocketLink,BAROMETER_IS_READY);
 	}
+	sendInfo();
 
 	if(calibrateBMP180(&BMP180) == BMP180_OK){
 		setSensorStatus(&RocketLink,BAROMETER_CALIBRATION);
 	}
+	sendInfo();
 	/*BMP180 Finish*/
 
 	/*MPU6050 Start*/
 	initMPU6050(&MPU6050,hi2c1);
-
-	if(isMPU6050Ready(&MPU6050)==MPU6050_OK){
-		setSensorStatus(&RocketLink,IMU_IS_READY);
-	}
+	isMPU6050Ready(&MPU6050);
+	setSensorStatus(&RocketLink,IMU_CALIBRATION);
+	sendInfo();
+	setMPU6050(&MPU6050);
+	setSensorStatus(&RocketLink,IMU_IS_READY);
+	sendInfo();
 	/*MPU6050 Finish*/
+
+	/*Preperation Start*/
+	setRocketStage(&RocketLink,READY_FOR_IGNITION);
+	sendInfo();
+	/*Preperation Finish*/
 
 
   /* USER CODE END 2 */
@@ -154,8 +169,10 @@ int main(void)
 	 setGPSLat(&RocketLink,GPS.latitude);
 	 setGPSLong(&RocketLink,GPS.longtitude);
 	 setGPSHdop(&RocketLink,GPS.hdop);
-	 setGPS
+	 setGPSSatelliteNumber(&RocketLink,GPS.satellite);
+	 setGPSAlt(&RocketLink,GPS.altitude);
 	 HAL_UART_Transmit(&huart2,RocketLink.sendPackage,128,1000);
+	 HAL_Delay(200);
     /* USER CODE BEGIN 3 */
 
   }
@@ -226,6 +243,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
 	 HAL_UART_Receive_DMA(&huart1,&GPS.checkBuffer,1);
 	}
+}
+
+void sendInfo(){
+	HAL_UART_Transmit(&RocketLink.myUART,RocketLink.sendPackage,128,1000);
+	HAL_Delay(200);
+	HAL_UART_Transmit(&RocketLink.myUART,RocketLink.sendPackage,128,1000);
+	HAL_Delay(200);
 }
 
 /* USER CODE END 4 */

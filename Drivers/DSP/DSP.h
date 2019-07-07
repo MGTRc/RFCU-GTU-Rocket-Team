@@ -12,29 +12,24 @@
  extern "C" {
 #endif
 
+#include "stm32f4xx_hal.h"
 #include "stdlib.h"
+#include "stdio.h"
 
 typedef enum{
 	DSP_OK,
 	DSP_ERROR
 }DSP_StatusTypeDef;
 
-typedef struct movingAverageInt16{
+typedef struct movingAverageFloat{
 	uint8_t size;
-	int16_t *buffer;
-
-}DSP_movingAverageInt16_HandleTypeDef;
-
-typedef struct movingAverageUint16{
-	uint8_t size;
-	uint16_t *buffer;
-}DSP_movingAverageUint16_HandleTypeDef;
+	float buffer[20];
+	float average;
+}movingAverageFloat;
 
 /*Functions*/
-DSP_movingAverageInt16_HandleTypeDef setMovingAverageInt16(struct movingAverageInt16 *movingAverageInt16);
-DSP_movingAverageUint16_HandleTypeDef setMovingAverageUint16(struct movingAverageUint16 *movingAverageUint16);
-int16_t updateMovingAverageInt16(struct movingAverageInt16 *movingAverageInt16, int16_t newValue);
-uint16_t updateMovingAverageUint16(struct movingAverageUint16 *movingAverageUint16);
+DSP_StatusTypeDef setMovingAverageFloat(struct movingAverageFloat *movingAverageFloat, uint8_t size);
+DSP_StatusTypeDef updateMovingAverageFloat(struct movingAverageFloat *movingAverageFloat, float data);
 
 #ifdef __cplusplus
 }

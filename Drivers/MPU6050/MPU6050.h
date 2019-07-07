@@ -49,6 +49,7 @@
 #include "stdlib.h"
 #include "i2c.h"
 #include "math.h"
+#include "DSP.h"
 
 typedef enum{
 	MPU6050_OK,
@@ -57,14 +58,14 @@ typedef enum{
 
 typedef struct MPU6050{
 	I2C_HandleTypeDef myI2C;
+	movingAverageFloat filter_X;
+	movingAverageFloat filter_Y;
+
 	uint8_t statusMPU6050;
 	float accX,accY,accZ;
 	int16_t accData[3];
-	float filtreredAccX,filtreredAccY,filtreredAccZ;
-	float bufferX[10],bufferY[10],bufferZ[10];
 	float angleX,angleY;
-	
-	
+	float rocketAngle;
 }MPU6050_HandleTypeDef;
 
 //Public Functions
@@ -76,10 +77,9 @@ MPU6050_StatusTypeDef calculateAngles(struct MPU6050 *MPU605);
 void writeByte(struct MPU6050 *MPU6050,uint8_t adress, uint8_t command);
 void readByte(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite);
 void readBytes(struct MPU6050 *MPU6050, uint8_t adress, uint8_t *toWrite, uint8_t size);
-void filterMPU6050(struct MPU6050 *MPU6050);
 void setMPU6050(struct MPU6050 *MPU6050);
 void readRawData(struct MPU6050 *MPU6050);
-void calculateRawAngles(struct MPU6050 *MPU6050);
+void calculateRocketAngles(struct MPU6050 *MPU6050);
 void bubble_sort(int16_t arr[], uint16_t n);
 
 #ifdef __cplusplus

@@ -14,6 +14,7 @@
 
 #include "stm32f4xx_hal.h"
 #include "stdlib.h"
+#include "usart.h"
 
 #define startByte 					36
 #define finishByte 					35
@@ -26,12 +27,8 @@ typedef enum{
 
 typedef enum{
 		PREPARING = 0,
-		BAROMETER_CALIBRATING = 1,
-		ACC_CALIBRATING = 2,
-		READY_FOR_IGNITION = 3,
-		EJECTED = 4,
-		ALTITUDE_THRESHOLD = 5,
-		APOGEE = 6,
+		READY_FOR_IGNITION = 1,
+		EJECTED = 2,
 		PARACHUTE_PAYLOAD_DEPLOYED = 7,
 		DESCENTING = 8,
 		LANDED	= 9,
@@ -44,6 +41,7 @@ typedef enum{
 	IMU_IS_READY = 2,
 	IMU_CALIBRATION = 3,
 	GPS_IS_READY = 4,
+	GPS_CALIBRATION = 5,
 }RocketLink_SensorStatus;
 
 typedef struct{
@@ -54,6 +52,7 @@ typedef struct{
 
 typedef  struct RocketLink{
 	RocketLink_InitTypeDef RocketLink_Init;
+	UART_HandleTypeDef myUART;
 	//Rocket Dynamic Parameters
 	uint8_t sensorStatus;
 	uint8_t sendPackage[128];
@@ -64,13 +63,14 @@ typedef  struct RocketLink{
 
 extern RocketLink_HandleTypeDef RocketLink;
 
-RocketLink_StatusTypeDef initRocketLink(struct RocketLink *RocketLink);
+RocketLink_StatusTypeDef initRocketLink(struct RocketLink *RocketLink, UART_HandleTypeDef myUART);
 RocketLink_StatusTypeDef initRocketLinkPackage(struct RocketLink *RocketLink);
 RocketLink_StatusTypeDef setRocketStage(struct RocketLink *RocketLink, RocketLink_Stage Stage);
 RocketLink_StatusTypeDef setBatteryVoltage(struct RocketLink *RocketLink, float batteryVoltage);
 RocketLink_StatusTypeDef setBusVoltage(struct RocketLink *RocketLink, float busVoltage);
 RocketLink_StatusTypeDef setCurrent(struct RocketLink *RocketLink, float current);
 RocketLink_StatusTypeDef setRFCUTemp(struct RocketLink *RocketLink, float temp);
+/*Barometer Parameters*/
 RocketLink_StatusTypeDef setPressure(struct RocketLink *RocketLink, float pressure);
 RocketLink_StatusTypeDef setBarometricAlt(struct RocketLink *RocketLink, float baroalt);
 RocketLink_StatusTypeDef setBarometricTemp(struct RocketLink *RocketLink, float barotemp);
