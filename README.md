@@ -1,5 +1,5 @@
 # [EN] Rocket Flight Control Unit(RFCU) | GTU Rocket Team
-The repository contains source code of RFCU's hardware,software and GCS.<br>
+The repository contains source codes of RFCU's hardware,software and GCS.<br>
 @GTU Rocket Team | Electronic and Sofware Group
 
 
