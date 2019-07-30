@@ -19,12 +19,14 @@ GPS_StatusTypeDef isGPSReady(struct GPS *GPS){
 	uint8_t buffer,status;
 	status = 1;
 	while(status){
-		HAL_UART_Receive(&huart1,&buffer,1,1000);
+		HAL_UART_Receive(&GPS->myUART,&buffer,1,1000);
 		if(buffer  == 10){
-			HAL_UART_Receive_DMA(&huart1,&GPS->checkBuffer,1);
+			HAL_UART_Receive_DMA(&GPS->myUART,&GPS->checkBuffer,1);
 			status = 0;
 		}
 	}
+
+	GPS->statusGPS = 1;
 
 	return GPS_OK;
 

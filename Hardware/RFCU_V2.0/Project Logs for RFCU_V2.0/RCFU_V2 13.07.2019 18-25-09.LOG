@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=TX2_IN Pin=P2-13
+Removed Pin From Net: NetName=RX2_IN Pin=P2-15
+Added Pin To Net: NetName=RX2_IN Pin=P2-13
+Added Pin To Net: NetName=TX2_IN Pin=P2-15

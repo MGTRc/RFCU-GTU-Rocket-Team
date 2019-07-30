@@ -12,7 +12,13 @@
  extern "C" {
 #endif
 
-#include "stm32f4xx_hal.h"
+
+#if defined(STMF1_Device)
+	#include "stm32f1xx_hal.h"
+#elif defined(STMF4_Device)
+	#include "stm32f4xx_hal.h"
+#endif
+
 #include "stdlib.h"
 #include "usart.h"
 
@@ -25,6 +31,7 @@ typedef struct GPS{
 	uint8_t gpsBuffer[120];
 	uint8_t gpsIndex;
 	uint8_t packageFind;
+	uint8_t statusGPS;
 	uint8_t checkBuffer;
 	uint8_t *lat,*lon,*alt,*h_dop,*v_dop,*sat;
 	uint8_t commoIndex[20];

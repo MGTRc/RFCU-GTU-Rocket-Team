@@ -78,7 +78,7 @@ RocketLink_StatusTypeDef setGPSAlt(struct RocketLink *RocketLink, float gpsalt){
 };
 
 RocketLink_StatusTypeDef setGPSSatelliteNumber(struct RocketLink *RocketLink, uint8_t satelliteNumber){
-	RocketLink->sendPackage[15] = satelliteNumber;
+	RocketLink->sendPackage[21] = satelliteNumber;
 	return RocketLink_OK;
 };
 
@@ -92,3 +92,7 @@ RocketLink_StatusTypeDef setRocketStage(struct RocketLink *RocketLink, RocketLin
 	return RocketLink_OK;
 };
 
+RocketLink_StatusTypeDef setPressure(struct RocketLink *RocketLink, float pressure){
+	floatToUint8(pressure,(RocketLink->sendPackage+22));
+	return RocketLink_OK;
+};

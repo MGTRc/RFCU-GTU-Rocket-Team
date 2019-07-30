@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=VSS1 Pin=P6-1
+Removed Pin From Net: NetName=ADCIN_0 Pin=P6-2
+Removed Pin From Net: NetName=ADCIN_1 Pin=P6-3
+Removed Pin From Net: NetName=ADCIN_2 Pin=P6-4
+Removed Pin From Net: NetName=ADCIN_3 Pin=P6-5
+Removed Pin From Net: NetName=VSS1 Pin=P6-6
+Removed Member From Class: ClassName=Sensor Member=P6
+Added Pin To Net: NetName=ADCIN_2 Pin=P2-21
+Added Pin To Net: NetName=ADCIN_0 Pin=P2-22
+Added Pin To Net: NetName=ADCIN_3 Pin=P2-23
+Added Pin To Net: NetName=ADCIN_1 Pin=P2-24

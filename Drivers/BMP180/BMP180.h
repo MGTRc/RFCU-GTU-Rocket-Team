@@ -12,6 +12,12 @@
  extern "C" {
 #endif
 
+#if defined(STMF1_Device)
+	#include "stm32f1xx_hal.h"
+#elif defined(STMF4_Device)
+	#include "stm32f4xx_hal.h"
+#endif
+
 /*Device I2C Adresses*/
 #define BMP180_Write_Adress 0xEF
 #define BMP180_Read_Adress 0xEE
@@ -33,7 +39,6 @@
 #define BMP180_MC 0xBC
 #define BMP180_MD 0xBE
 
-#include "stm32f4xx_hal.h"
 #include "stdlib.h"
 #include "math.h"
 #include "i2c.h"

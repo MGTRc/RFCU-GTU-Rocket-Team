@@ -12,7 +12,13 @@
  extern "C" {
 #endif
 
-#include "stm32f4xx_hal.h"
+
+#if defined(STMF1_Device)
+	#include "stm32f1xx_hal.h"
+#elif defined(STMF4_Device)
+	#include "stm32f4xx_hal.h"
+#endif
+
 #include "stdlib.h"
 #include "stdio.h"
 

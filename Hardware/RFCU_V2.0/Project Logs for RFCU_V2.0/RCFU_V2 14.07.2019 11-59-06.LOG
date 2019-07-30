@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=LoadIN Pin=U4-4
+Change Net Name : Old Net Name=Sense_BAT New Net Name=NetR5_2
+Added Pin To Net: NetName=Battery Pin=U4-4
+Added Net: Name=Battery

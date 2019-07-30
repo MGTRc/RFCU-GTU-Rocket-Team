@@ -166,13 +166,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	 calcPressure(&BMP180);
 	 setGPSLat(&RocketLink,GPS.latitude);
 	 setGPSLong(&RocketLink,GPS.longtitude);
 	 setGPSHdop(&RocketLink,GPS.hdop);
-	 setGPSSatelliteNumber(&RocketLink,GPS.satellite);
 	 setGPSAlt(&RocketLink,GPS.altitude);
+	 setGPSSatelliteNumber(&RocketLink,GPS.satellite);
+	 setPressure(&RocketLink,BMP180.pressurehPa);
 	 HAL_UART_Transmit(&huart2,RocketLink.sendPackage,128,1000);
-	 HAL_Delay(200);
+	 HAL_Delay(500);
     /* USER CODE BEGIN 3 */
 
   }

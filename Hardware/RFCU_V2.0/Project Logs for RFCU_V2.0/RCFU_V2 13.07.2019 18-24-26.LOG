@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=RX2_IN Pin=U3-3
+Removed Pin From Net: NetName=VSS1 Pin=U3-4
+Removed Pin From Net: NetName=RX1_IN Pin=U3-5
+Removed Pin From Net: NetName=VDD1 Pin=U3-8
+Added Pin To Net: NetName=RX1_IN Pin=U1-13
+Added Pin To Net: NetName=RX2_IN Pin=U1-31
+Change Net Name : Old Net Name=GPS_TX New Net Name=TX2_IN
+Change Net Name : Old Net Name=TEL_TX New Net Name=TX1_IN

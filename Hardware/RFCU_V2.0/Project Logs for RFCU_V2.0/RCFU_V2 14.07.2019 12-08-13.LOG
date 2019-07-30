@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=VSS1 Pin=P6-1
+Removed Pin From Net: NetName=VSS1 Pin=P7-1
+Removed Member From Class: ClassName=Ejection Member=P6
+Removed Member From Class: ClassName=Ejection Member=P7

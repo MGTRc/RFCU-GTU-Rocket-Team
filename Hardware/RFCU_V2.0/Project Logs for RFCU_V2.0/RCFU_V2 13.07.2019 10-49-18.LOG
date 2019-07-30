@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=VSS1 Pin=P2-30
+Removed Pin From Net: NetName=VDD1 Pin=P2-31
+Removed Pin From Net: NetName=VDD1 Pin=P2-33
+Removed Pin From Net: NetName=VDD1 Pin=P2-35
+Added Pin To Net: NetName=VDD1 Pin=P2-25
+Added Pin To Net: NetName=VDD1 Pin=P2-26
+Added Pin To Net: NetName=VDD1 Pin=P2-27
+Added Pin To Net: NetName=VDD1 Pin=P2-28
+Added Pin To Net: NetName=VDD1 Pin=P2-30
+Added Pin To Net: NetName=VSS1 Pin=P2-31
+Added Pin To Net: NetName=VSS1 Pin=P2-33
+Added Pin To Net: NetName=VSS1 Pin=P2-35
